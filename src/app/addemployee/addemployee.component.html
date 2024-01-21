@@ -1,0 +1,198 @@
+
+<div class="container-fluid px-1 py-5 mx-auto bg-image">
+  <div class="row d-flex justify-content-center">
+    <div class="col-xl-7 col-lg-8 col-md-9 col-11">
+      <div class="card">
+        <h1 class="blue-text text-center"><b>Add New Employee</b></h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ..." id="firstName"
+                  formControlName="firstName"
+                  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                />
+                <div
+                *ngIf="submitted && f.firstName.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.firstName.errors.required">
+                  First Name required
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ..."
+                  id="lastName"
+                  formControlName="lastName"
+                  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                />
+                <div
+                *ngIf="submitted && f.lastName.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.lastName.errors.required">
+                  Last Name required
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ..." formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                 </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>birth Date</label>
+                <input
+                type="date" id="birthdate" placeholder="Choose a date" formControlName="birthDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
+                />
+                
+                <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
+                    <div *ngIf="f.birthDate.errors.required">Birth Date is required</div>
+                    <div *ngIf="form.get('birthDate').hasError('maxDateToday')">
+                        Birth Date cannot exceed today.
+                      </div>
+                 </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Basic Salary</label>
+                <input
+                  type="text"
+                  id="basicSalary"
+                  formControlName="basicSalary"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.basicSalary.errors
+                  }"
+                  class="form-control"
+                  appCurrencyFormat
+                />
+                <div
+                  *ngIf="submitted && f.basicSalary.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.basicSalary.errors.required">
+                    Basic Salary required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Status</label>
+                <select class="form-control" formControlName="status" [ngClass]="{
+                    'is-invalid': submitted && f.status.errors
+                  }">
+                  <option value="" disabled selected>--CHOOSE--</option>
+                  <option value="active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+                <div
+                  *ngIf="submitted && f.status.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.status.errors.required">
+                    Status is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Group</label>
+                <select class="form-control" formControlName="group" [ngClass]="{
+                    'is-invalid': submitted && f.group.errors
+                  }">
+                  <option value="" disabled selected>--CHOOSE--</option>
+                  <option>Group A</option>
+                  <option>Group B</option>
+                  <option>Group C</option>
+                  <option>Group D</option>
+                  <option>Group E</option>
+                  <option>Group F</option>
+                  <option>Group G</option>
+                  <option>Group H</option>
+                  <option>Group I</option>
+                  <option>Group J</option>
+                </select>
+                <div
+                *ngIf="submitted && f.group.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.group.errors.required">
+                  Group is required
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ..."
+                  id="lastName"
+                  formControlName="description"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                />
+                <div
+                *ngIf="submitted && f.description.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.description.errors.required">
+                  Description is required
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button
+              class="btn btn-lg btn-danger btn-login text-uppercase fw-bold mb-2"
+              type="button" (click)="handleButtonClick()"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
