@@ -25,7 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ModalComponent } from './modal/modal.component';
 import { DeletemodalComponent } from './deletemodal/deletemodal.component';
-
+import { Select2Module } from './select2.module'; 
 
 
 
@@ -56,6 +56,7 @@ import { DeletemodalComponent } from './deletemodal/deletemodal.component';
     ServerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    Select2Module
   ],
   providers: [
     provideClientHydration()

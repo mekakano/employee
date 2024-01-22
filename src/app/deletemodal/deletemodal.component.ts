@@ -27,8 +27,5 @@ export class DeletemodalComponent {
     localStorage.setItem("employeeList", JSON.stringify(storedValueFromLocalStorage));
     //window.location.reload();
     
-    setTimeout(()=>{   
-      $('#datatableexample').DataTable().ajax.reload();
-    }, 1);
   }
 }
