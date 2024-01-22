@@ -13,18 +13,17 @@ import { maxDateTodayValidator } from '../date.validator';
 import jsonArray from '../../model/data.js';
 import { existingJsonArray } from '../../model/data2';
 import { Router } from '@angular/router';
-declare var $: any;
+import { Select2Option, Select2UpdateEvent } from 'ng-select2-component';
 
 @Component({
   selector: 'app-addemployee',
   templateUrl: './addemployee.component.html',
   styleUrl: './addemployee.component.css',
 })
-export class AddemployeeComponent implements AfterViewInit {
+export class AddemployeeComponent {
   @Output() newItemAdded = new EventEmitter<any>();
   dataSource = existingJsonArray;
   @ViewChild('picker') picker: any;
-  @ViewChild('groupSelect') selectElement!: ElementRef;
   form: any = FormGroup;
   submitted = false;
   storedValue: any[] = [];
@@ -85,13 +84,11 @@ export class AddemployeeComponent implements AfterViewInit {
 
         //let users: any[] = this.storedValue ? JSON.parse(this.storedValue) : [this.dataSource];
       }
+      alert('Berhasil Tambah Data');
+      window.location.reload;
     }
   }
 
-  ngAfterViewInit() {
-    // Initialize Select2 after the view has been initialized
-    $(this.selectElement.nativeElement).select2();
-  }
   ngOnInit() {
     //Add User form validations
     this.form = this.formBuilder.group({
@@ -121,4 +118,32 @@ export class AddemployeeComponent implements AfterViewInit {
   handleButtonClick() {
     this.router.navigate(['/dashboard']);
   }
+
+  data1: any = [
+    {
+      label: '--PILIH--',
+      options: [
+        { value: 'Group J', label: 'Group J' },
+        { value: 'Group I', label: 'Group I' },
+        { value: 'Group H', label: 'Group H' },
+        { value: 'Group G', label: 'Group G' },
+        { value: 'Group F', label: 'Group F' },
+        { value: 'Group E', label: 'Group E' },
+        { value: 'Group D', label: 'Group D' },
+        { value: 'Group C', label: 'Group C' },
+        { value: 'Group B', label: 'Group B' },
+        { value: 'Group A', label: 'Group A' },
+      ],
+    },
+  ];
+ 
+  search(text: string) {
+    this.data1 = text
+      ? (JSON.parse(JSON.stringify(this.data1)) as Select2Option[]).filter(
+          (option) =>
+            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+        )
+      : JSON.parse(JSON.stringify(this.data1));
+  }
+  value1 = 'Group A';
 }

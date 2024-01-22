@@ -2,6 +2,14 @@
 
 isi data ada di src/model/data.ts
 
+untuk login bisa menggunakan email di data
+
+# untuk running
+
+npm i
+
+ng serve
+
 
 # ProjectEmployee
 

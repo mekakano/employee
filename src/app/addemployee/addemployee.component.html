@@ -129,21 +129,15 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label>Group</label>
-                <select class="form-control" formControlName="group" [ngClass]="{
-                    'is-invalid': submitted && f.group.errors
-                  }">
-                  <option value="" disabled selected>--CHOOSE--</option>
-                  <option>Group A</option>
-                  <option>Group B</option>
-                  <option>Group C</option>
-                  <option>Group D</option>
-                  <option>Group E</option>
-                  <option>Group F</option>
-                  <option>Group G</option>
-                  <option>Group H</option>
-                  <option>Group I</option>
-                  <option>Group J</option>
-                </select>
+                <select2 class="form-control" formControlName="group" [ngClass]="{
+                  'is-invalid': submitted && f.group.errors
+                }"
+              [data]="data1"
+              (search)="search('search1')"
+              resettable
+              id="selec2-1"
+          >
+          </select2>
                 <div
                 *ngIf="submitted && f.group.errors"
                 class="invalid-feedback"
@@ -176,6 +170,8 @@
               </div>
             </div>
           </div>
+
+          
 
           <div class="d-grid">
             <button
