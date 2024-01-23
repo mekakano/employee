@@ -1,4 +1,4 @@
-import { Component, ViewChild, Inject, OnInit } from '@angular/core';
+import { Component, ViewChild, Inject, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,13 +9,14 @@ import { ModalComponent } from '../modal/modal.component';
 import { DeletemodalComponent } from '../deletemodal/deletemodal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-employeelist',
   templateUrl: './employeelist.component.html',
   styleUrl: './employeelist.component.css',
 })
-export class EmployeelistComponent {
+export class EmployeelistComponent implements AfterViewInit{
   groupOptions = ['Group A', 'Group B', 'Group C', 'Group D', 'Group E', 'Group F', 'Group G', 'Group H', 'Group I', 'Group J'];
   editform: any = FormGroup;
   submitted = false;
@@ -37,14 +38,18 @@ export class EmployeelistComponent {
       storedValueFromLocalStorage = localStorage.getItem('employeeList');
       this.storedValue = storedValueFromLocalStorage;
     }
-    setTimeout(() => {
-      $('#datatableexample').DataTable({
-        pagingType: 'full_numbers',
-        pageLength: 5,
-        processing: true,
-        lengthMenu: [5, 10, 25],
-      });
-    }, 1);
+    if ($.fn.DataTable) {
+      setTimeout(() => {
+        $('#datatableexample').DataTable({
+          pagingType: 'full_numbers',
+          pageLength: 5,
+          processing: true,
+          lengthMenu: [5, 10, 25],
+        });
+      }, 1);
+    } else {
+      console.error('DataTables not available.');
+    }
   }
 
   handleButtonClick() {
